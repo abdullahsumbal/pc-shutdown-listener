@@ -1,0 +1,6 @@
+pyrebase==3.0.27
+firebase_admin
+google-cloud-core
+google-cloud-firestore
+grpcio
+pyinstaller
