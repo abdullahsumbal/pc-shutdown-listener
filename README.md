@@ -20,7 +20,7 @@ I prefer to install all my dependencies in a virtual environment.
 
 ### 3. Create Firebase Firestore database
 
-> Add collection and document as shown in the image (first and second) below. The python script uses these exact values. Also change the rules to allow read and write (third image)
+> Add collection and document as shown in the image (first image) below. The python script uses these exact values. Also change the rules to allow read and write (2nd image)
 
 ![pc_state](images/image1.PNG)
 ![rules](images/image3.PNG)
