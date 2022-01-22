@@ -20,10 +20,9 @@ I prefer to install all my dependencies in a virtual environment.
 
 ### 3. Create Firebase Firestore database
 
-> Add collection, document and fields as shown in the image (first and second) below. The python script uses these exact values. Also change the rules to allow read and write (third image)
+> Add collection and document as shown in the image (first and second) below. The python script uses these exact values. Also change the rules to allow read and write (third image)
 
 ![pc_state](images/image1.PNG)
-![timestamp](images/image2.PNG)
 ![rules](images/image3.PNG)
 
 ### 4. Test script
@@ -32,9 +31,13 @@ I prefer to install all my dependencies in a virtual environment.
 
 ### 5. (Optional)Create executable file using pyinstaller
 
+> Uncomment this line
+
+    os.chdir(sys._MEIPASS)
+
 > Till now you have to run the script manually first in order to remotely shutdown your PC. This is no fun. We need to automatically start this script on startup. So I created an executable file. Yes, an exe file that runs like any windows program. I achieved this using pyinstaller. It should be already be installed if you have done step 1. Run this command to create an executable file.
 
-        pyinstaller --onefile app.py
+        pyinstaller   --onefile -F --add-data "firebase-sdk.json;." app.py
 
 > This will create app.exe file in dist directory. Now put this app.exe in your startup directory.
 
