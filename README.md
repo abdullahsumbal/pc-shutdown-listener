@@ -29,6 +29,8 @@ I prefer to install all my dependencies in a virtual environment.
 
 > Run the python code. It will set the PC state to 1 in database. As soon as you change the state value from 1 to 0, it will shutdown your pc. The timestamp is also updated every time you change state.
 
+![pc_state](images/image2.PNG)
+
 ### 5. (Optional)Create executable file using pyinstaller
 
 > Uncomment this line
