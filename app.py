@@ -6,7 +6,9 @@ import os
 import threading
 import sys
 
-os.chdir(sys._MEIPASS)
+# uncomment line below when running pyinstaller
+# os.chdir(sys._MEIPASS)
+
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate(
     'firebase-sdk.json')
@@ -17,20 +19,18 @@ firebase_admin.initialize_app(cred, {
 })
 
 db = firestore.client()
-
 # whenever this program runs that means the PC is on
-doc_ref = db.collection(u'shutdown').document(u'pc_state')
-doc_ref.update(
+doc_pc_state_ref = db.collection(u'shutdown').document(u'pc_state')
+doc_pc_state_ref.update(
     {"state": 1})
-
 # make sure the state is set to 1 because the PC just started
 print("PC started")
 print("Setting PC state to 1")
-state = 0
-while not state:
-    state = doc_ref.get().to_dict()["state"]
-    print(f'Current state: {state}')
-print("PC state set to 1")
+if doc_pc_state_ref.get().to_dict()["state"] == 1:
+    print("PC state set to 1")
+else:
+    print("Unable to set PC state to 1")
+    exit()
 
 # Create an Event for notifying main thread.
 callback_done = threading.Event()
@@ -50,7 +50,7 @@ def on_snapshot(doc_snapshot, changes, read_time):
 
 
 # Watch the document
-watch_doc = doc_ref.on_snapshot(on_snapshot)
+watch_doc = doc_pc_state_ref.on_snapshot(on_snapshot)
 callback_done.wait()
 print("shutting down pc")
-os.system("shutdown -l")
+os.system("shutdown /s /t 10")
